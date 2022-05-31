@@ -4,6 +4,6 @@ from app import flask_app
 def home():
     return 'Wecolme to Google Cloud DevOps!!!'
 
-flask_app.route('/about')
+@flask_app.route('/about')
 def about():
     return 'Welcome this is the about Page'
