@@ -1,0 +1,15 @@
+apiVersion: skaffold/v2beta26
+kind: Config
+metadata:
+  name: webapp
+profiles:
+  - name: staging
+    deploy:
+      kustomize:
+        paths:
+          - kustomize/overlays/staging
+  - name: production
+    deploy:
+      kustomize:
+        paths:
+          - kustomize/overlays/prod

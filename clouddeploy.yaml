@@ -1,0 +1,32 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+ name: webapp
+description: main application pipeline
+serialPipeline:
+ stages:
+ - targetId: staging
+   profiles:
+     - development
+ - targetId: prod
+   profiles:
+     - production
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: staging
+description: development cluster
+gke:
+ cluster: projects/qwiklabs-gcp-03-8eacc71eaafd/locations/us-central1-c/clusters/staging
+---
+
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+ name: prod
+description: production cluster
+requireApproval: true
+gke:
+ cluster: projects/qwiklabs-gcp-03-8eacc71eaafd/locations/us-central1-c/clusters/prod

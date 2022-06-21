@@ -1,0 +1,26 @@
+steps:
+  # Install dependencies
+  - name: python:3.7-slim
+    entrypoint: pip
+    args: ["install", "-r", "requirements.txt", "--user"]
+  # Run unit tests
+  - name: python:3.7-slim
+    entrypoint: python
+    args: ["-m", "pytest", "-v"]
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME', '.']
+  # Push to gcr
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME']
+  # Create release in Google Cloud Deploy
+  - name: google/cloud-sdk
+    entrypoint: gcloud
+    args:
+      [
+        'deploy', 'releases', 'create', 'rel-${SHORT_SHA}',
+        '--delivery-pipeline', 'webapp-delivery-pipeline',
+        '--region', 'us-central1',
+        '--annotations', 'commitId=${REVISION_ID}',
+        '--images', 'webappImage=us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME'
+      ]
