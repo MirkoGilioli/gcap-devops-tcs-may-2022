@@ -19,3 +19,7 @@ def inventory():
 @flask_app.route('/orders')
 def orders():
     return 'Welcome this is the orders Page'
+
+@flask_app.route('/auth')
+def auth():
+    return 'Welcome this is the auth Page'
