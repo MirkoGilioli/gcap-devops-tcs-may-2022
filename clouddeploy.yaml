@@ -19,7 +19,7 @@ metadata:
  name: staging
 description: development cluster
 gke:
- cluster: projects/qwiklabs-gcp-03-8eacc71eaafd/locations/us-central1-c/clusters/staging
+ cluster: projects/qwiklabs-gcp-00-841bb08f81d5/locations/us-central1-c/clusters/staging
 ---
 
 apiVersion: deploy.cloud.google.com/v1
@@ -29,4 +29,4 @@ metadata:
 description: production cluster
 requireApproval: true
 gke:
- cluster: projects/qwiklabs-gcp-03-8eacc71eaafd/locations/us-central1-c/clusters/prod
+ cluster: projects/qwiklabs-gcp-00-841bb08f81d5/locations/us-central1-c/clusters/prod
