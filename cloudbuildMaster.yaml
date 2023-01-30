@@ -16,4 +16,3 @@ steps:
            '--region=us-central1',
            '--port=8080'
           ]
-    
