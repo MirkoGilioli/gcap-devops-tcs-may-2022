@@ -15,3 +15,7 @@ def help():
 @flask_app.route('/orders')
 def orders():
     return 'Welcome this is the orders Page'
+
+@flask_app.route('/inventory')
+def orders():
+    return 'Welcome this is the inventory Page'
