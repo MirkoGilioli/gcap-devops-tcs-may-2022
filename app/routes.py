@@ -19,3 +19,7 @@ def orders():
 @flask_app.route('/inventory')
 def orders():
     return 'Welcome this is the inventory Page'
+
+@flask_app.route('/news')
+def news():
+    return 'Welcome this is the news Page'
