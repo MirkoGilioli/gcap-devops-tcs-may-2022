@@ -14,5 +14,5 @@ def test_inventory_methodNotAllowed(client):
     WHEN  the '/inventory' page is hit with POST method
     THEN check that 405 is returned (Method Not Allowed)
     '''
-    resp = client.post('/')
+    resp = client.post('/inventory')
     assert resp.status_code == 405
