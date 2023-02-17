@@ -9,10 +9,16 @@ steps:
     args: ['build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME', '.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME']
-  - name: google/cloud-sdk
-    args: ['gcloud', 'run', 'deploy', 'webapp',
-           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME',
-           '--allow-unauthenticated',
-           '--region=us-central1',
-           '--port=8080'
-          ]
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: 
+      - 'run'
+      - 'deploy'
+      - 'webapp'
+      - '--region'
+      - 'us-central1'
+      - '--port'
+      - '8080'
+      - '--allow-unauthenticated'
+    images:
+      - 'us-central1-docker.pkg.dev/$PROJECT_ID/webapp-repo/webapp:$TAG_NAME'
